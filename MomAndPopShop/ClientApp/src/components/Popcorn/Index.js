@@ -10,6 +10,10 @@ const Popcorn = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        refreshData();
+    }, []);
+
+    const refreshData = () => {
         fetch('popcorn')
             .then((results) => {
                 return results.json();
@@ -21,7 +25,9 @@ const Popcorn = () => {
             .finally(() => {
                 setLoading(false);
             });
-    }, []);
+    }
+
+    
 
     return (
         <main>
@@ -48,6 +54,7 @@ const Popcorn = () => {
                                     <td>
                                         <Link to={`/popcorn/edit/${popcornItem.id}`}>Edit</Link>
                                         {' | '}
+                                        <a onClick={handleDelete(popcornItem.id)}>DeleteAnchor</a>
                                         <Link to={`/popcorn/delete/${popcornItem.id}`}>Delete</Link>
                                     </td>
                                 </tr>
